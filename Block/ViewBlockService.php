@@ -39,7 +39,7 @@ class ViewBlockService extends BaseBlockService implements ViewBlockServiceInter
      */
     public function buildEditForm(FormMapper $form, BlockInterface $block)
     {
-        $formMapper->add('settings', 'sonata_type_immutable_array', array(
+        $form->add('settings', 'sonata_type_immutable_array', array(
             'keys' => array(
                 array('design_document', 'text', array('required' => true)),
                 array('view', 'text', array('required' => false)),
