@@ -23,11 +23,6 @@ class TopTagBlockService extends DateViewBlockService
     protected $manager;
 
     /**
-     * @var CouchDBClient
-     */
-    protected $client;
-
-    /**
      * @param FormMapper     $form
      * @param BlockInterface $block
      *
@@ -56,7 +51,7 @@ class TopTagBlockService extends DateViewBlockService
     public function query(BlockContextInterface $blockContext)
     {
         $settings = $blockContext->getSettings();
-        $query = $this->client->createViewQuery($settings['design_document'], $settings['view']);
+        $query = $this->manager->getCouchDBClient()->createViewQuery($settings['design_document'], $settings['view']);
 
         return $query;
     }
@@ -128,13 +123,5 @@ class TopTagBlockService extends DateViewBlockService
         }
 
         return $results;
-    }
-
-    /**
-     * @param CouchDBClient $client
-     */
-    public function setClient(CouchDBClient $client)
-    {
-        $this->client = $client;
     }
 }
