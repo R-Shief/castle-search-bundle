@@ -22,6 +22,8 @@ class DefaultController extends Controller
         $data = array(
             'published_upper' => new \DateTime(),
         );
+        $lowerDate = new \DateTime();
+        $upperDate = new \DateTime();
         $formBuilder = $this->createFormBuilder($data, array(
             'attr' => array(
                 'class' => 'form-inline facetview_search_options_container',
@@ -40,6 +42,8 @@ class DefaultController extends Controller
                 ),
             ))
             ->add('published_lower', 'date', array(
+                'months' => array($lowerDate->format('n'), $lowerDate->sub(new \DateInterval('P1M'))->format('n')),
+                'years' => array($lowerDate->format('Y'), $lowerDate->sub(new \DateInterval('P1M'))->format('Y')),
                 'empty_value' => '',
                 'label' => 'From',
                 'label_attr' => array(
@@ -47,6 +51,8 @@ class DefaultController extends Controller
                 ),
             ))
             ->add('published_upper', 'date', array(
+                'months' => array($upperDate->format('n'), $upperDate->sub(new \DateInterval('P1M'))->format('n')),
+                'years' => array($upperDate->format('Y'), $upperDate->sub(new \DateInterval('P1M'))->format('Y')),
                 'empty_value' => '',
                 'label' => 'To',
                 'label_attr' => array(
