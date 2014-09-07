@@ -34,7 +34,7 @@
 
 {% block header %}
     <h1 class="page-header">Enter a hashtag</h1>
-    <input type="text" ng-model="tag" typeahead-on-select="getData()" typeahead-min-length="3" typeahead-wait-ms="100" typeahead-editable="false" placeholder="Enter a hashtag" typeahead="address for address in getTags($viewValue) | filter:$viewValue" class="form-control input-lg">
+    <input type="text" ng-model="tag" typeahead-on-select="getData()" typeahead-min-length="3" typeahead-wait-ms="100" typeahead-editable="false" placeholder="Start typing and our list of keywords will drop down" typeahead="address for address in getTags($viewValue) | filter:$viewValue" class="form-control input-lg">
     <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
 {% endblock %}
 
