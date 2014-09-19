@@ -1,4 +1,4 @@
-/*global castleSearch, ejs, castle, _, angular, Routing, NgRouting */
+/*global castleSearch, ejs, castle, _, angular */
 castleSearch
     .controller('SearchCtrl', function ($scope, es, $location) {
         "use strict";
