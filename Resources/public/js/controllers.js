@@ -1,7 +1,7 @@
-/*global castleSearch, ejs, castle, _, angular */
+/*global castleSearch, ejs, _, angular */
 castleSearch
     .controller('SearchCtrl', function ($scope, es, $location) {
-        "use strict";
+        'use strict';
         var oQuery = ejs.QueryStringQuery();
 
         angular.forEach(['sort', 'queryTerm', 'tag', 'collection', 'published_upper', 'published_lower'], function (key) {
@@ -95,7 +95,7 @@ castleSearch
                 filters = [];
                 facets = $scope.query.facet()[key];
                 angular.forEach(facets, function (facet, type) {
-                    var fields = facet.hasOwnProperty('fields') ? facet.fields : [ facet.field ];
+                    var fields = facet.hasOwnProperty('fields') ? facet.fields : [facet.field];
                     angular.forEach(fields, function (value) {
                         filters.push(ejs.NumericRangeFilter(value).from(term));
                     });
@@ -138,17 +138,17 @@ castleSearch
                 angular.forEach(results.hits.hits, function (value, key) {
 
                     var thumbnailLink, authorLink, canonicalLink, alternateLink, displayLinks;
-                    thumbnailLink = _.findWhere(value._source.links, { rel: 'thumbnail' }) ||
-                        _.findWhere(value._source.links, { rel: 'image' }) ||
-                        _.findWhere(value._source.links, { type: 'image' }) ||
-                        _.findWhere(value._source.links, { rel: 'author thumbnail' }) ||
-                    { href: 'http://placehold.it/96x96' };
+                    thumbnailLink = _.findWhere(value._source.links, {rel: 'thumbnail'}) ||
+                    _.findWhere(value._source.links, {rel: 'image'}) ||
+                    _.findWhere(value._source.links, {type: 'image'}) ||
+                    _.findWhere(value._source.links, {rel: 'author thumbnail'}) ||
+                    {href: 'http://placehold.it/96x96'};
 
-                    authorLink = _.findWhere(value._source.links, { rel: 'author' });
+                    authorLink = _.findWhere(value._source.links, {rel: 'author'});
 
-                    canonicalLink = _.findWhere(value._source.links, { rel: 'canonical' });
+                    canonicalLink = _.findWhere(value._source.links, {rel: 'canonical'});
 
-                    alternateLink = _.findWhere(value._source.links, { rel: 'alternate' }) || _.findWhere(value._source.links, { rel: '' });
+                    alternateLink = _.findWhere(value._source.links, {rel: 'alternate'}) || _.findWhere(value._source.links, {rel: ''});
 
                     displayLinks = _.without(value._source.links, thumbnailLink, authorLink, canonicalLink, alternateLink);
 
@@ -194,7 +194,7 @@ castleSearch
         };
     })
     .controller('TermFacet', function ($scope, $window) {
-        "use strict";
+        'use strict';
 
         $scope.typeNames = $window.castle.typeNames;
 
@@ -212,7 +212,7 @@ castleSearch
                 facets = $scope.query.facet()[key];
                 angular.forEach(facets, function (facet, type) {
                     var fields;
-                    fields = facet.hasOwnProperty('fields') ? facet.fields : [ facet.field ];
+                    fields = facet.hasOwnProperty('fields') ? facet.fields : [facet.field];
                     angular.forEach(fields, function (value) {
                         filters.push(ejs.TermFilter(value, term));
                     });
@@ -229,6 +229,7 @@ castleSearch
         };
     })
     .controller('HelpModal', function ($scope, $modal) {
+        'use strict';
         $scope.open = function () {
 
             var modalInstance = $modal.open({
@@ -236,13 +237,14 @@ castleSearch
                 controller: function ($scope, $modalInstance) {
                     $scope.ok = function () {
                         $modalInstance.dismiss('ok');
-                    }
+                    };
                 }
             });
             modalInstance.result.then();
         };
     })
     .controller('LimitModal', function ($scope, $modal) {
+        'use strict';
         var original_limit = $scope.pager.limit;
         $scope.open = function () {
             var modalInstance = $modal.open({
@@ -274,26 +276,26 @@ castleSearch
         };
     })
     .controller('TagsTypeahead', ['$scope', '$location', 'cornercouch', function ($scope, $location, cornercouch) {
-        "use strict";
+        'use strict';
 
         $scope.data = [];
         $scope.tag = $location.hash();
 
-        $scope.server = cornercouch("/couchdb", "GET");
+        $scope.server = cornercouch('/couchdb', 'GET');
         $scope.db = $scope.server.getDB('symfony');
 
         $scope.options = {
             axes: {
-                x: { type: "date" },
-                y: { type: "linear" }
+                x: {type: 'date'},
+                y: {type: 'linear'}
             },
             series: [
                 {
-                    y: "value",
+                    y: 'value',
                     label: $scope.tag
                 }
             ],
-            lineMode: "cardinal"
+            lineMode: 'cardinal'
         };
 
 
@@ -309,7 +311,13 @@ castleSearch
         $scope.getTags = function (val) {
             var endkey = val.substr(0, val.length - 1) + String.fromCharCode(val.charCodeAt(val.length - 1) + 1);
             return $scope.db
-                .query('stats', 'tag', { stale: 'ok', group: true, group_level: 1, startkey: [val], endkey: [endkey, {}] })
+                .query('stats', 'tag', {
+                    stale: 'ok',
+                    group: true,
+                    group_level: 1,
+                    startkey: [val],
+                    endkey: [endkey, {}]
+                })
                 .then(function (res) {
                     return _.map(res.data.rows, function (row) {
                         return row.key[0];
@@ -320,7 +328,13 @@ castleSearch
         $scope.getData = function () {
             if ($scope.tag) {
                 $scope.db
-                    .query('stats', 'tag', { stale: 'ok', group: true, group_level: 5, startkey: [$scope.tag], endkey: [$scope.tag, {}]})
+                    .query('stats', 'tag', {
+                        stale: 'ok',
+                        group: true,
+                        group_level: 5,
+                        startkey: [$scope.tag],
+                        endkey: [$scope.tag, {}]
+                    })
                     .then(function (res) {
                         $scope.data = _.map(res.data.rows, function (row) {
                             var utc = row.key.splice(1);

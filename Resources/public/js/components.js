@@ -2,7 +2,7 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, noarg:true, noempty:true, nonew:true, undef:true, strict:true, latedef:true, unused:true, indent:4, browser:true */
 castleSearch
     .directive('atomTextConstruct', function () {
-        "use strict";
+        'use strict';
         return {
             restrict: 'E',
             scope: {
@@ -11,7 +11,7 @@ castleSearch
             link: function (scope, element, attrs) {
                 var filterTags, html, type;
                 filterTags = function (html) {
-                    var tmp = document.createElement("DIV");
+                    var tmp = document.createElement('DIV');
                     tmp.innerHTML = html;
                     return tmp.textContent || tmp.innerText;
                 };
@@ -34,7 +34,7 @@ castleSearch
         };
     })
     .directive('errSrc', function () {
-        "use strict";
+        'use strict';
         return {
             link: function (scope, element, attrs) {
                 element.bind('error', function () {
