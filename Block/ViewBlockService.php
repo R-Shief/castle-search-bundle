@@ -100,6 +100,9 @@ class ViewBlockService extends BaseBlockService implements ViewBlockServiceInter
 
             if ($settings['group']) {
                 $query->setGroup(true);
+            }
+
+            if ($settings['group_level']) {
                 $query->setGroupLevel($settings['group_level']);
             }
 

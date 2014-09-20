@@ -119,7 +119,7 @@ class TopTagBlockService extends DateViewBlockService
         $results = array();
 
         foreach ($query->execute() as $result) {
-            $results[$result['value']] = $result['key'][3];
+            $results[$result['key'][5]] = $result['value'];
         }
 
         return $results;
