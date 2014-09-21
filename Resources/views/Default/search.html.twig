@@ -100,7 +100,7 @@
         }
     }) }}
     <h2>Today</h2>
-    {# sonata_block_render({
+    {% sonata_block_render({
         'type': 'bangpound_castle_search.block.top_tag_view',
         'settings': {
             'design_document': 'stats',
@@ -109,13 +109,14 @@
             'reduce': true,
             'group': true,
             'group_level': 4,
+            'limit': 10,
             'startkey': [ (date() | date('Y')) + 0, (date() | date('m')) + 0, (date() | date('d')) + 0 ],
             'endkey': [ (date('+1 day') | date('Y')) + 0, (date('+1 day') | date('m')) + 0, (date('+1 day') | date('d')) + 0 ],
             'template': 'BangpoundCastleSearchBundle:Block:block_view_top_tag.html.twig'
         }
-    }) #}
+    }) %}
     <h2>Yesterday</h2>
-    {# sonata_block_render({
+    {% sonata_block_render({
         'type': 'bangpound_castle_search.block.top_tag_view',
         'settings': {
             'design_document': 'stats',
@@ -124,9 +125,10 @@
             'reduce': true,
             'group': true,
             'group_level': 4,
+            'limit': 10,
             'startkey': [ (date('-1 day') | date('Y')) + 0, (date('-1 day') | date('m')) + 0, (date('-1 day') | date('d')) + 0 ],
             'endkey': [ (date() | date('Y')) + 0, (date() | date('m')) + 0, (date() | date('d')) + 0 ],
             'template': 'BangpoundCastleSearchBundle:Block:block_view_top_tag.html.twig'
         }
-    }) #}
+    }) %}
 {% endblock %}
