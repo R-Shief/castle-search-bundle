@@ -59,76 +59,12 @@
 {% endblock %}
 
 {% block first_sidebar %}
-    {{ sonata_block_render({
-        'type': 'bangpound_castle_search.block.date_view',
-        'settings': {
-            'title': 'Daily',
-            'body': 'Count of items per day for last week.',
-            'design_document': 'stats',
-            'view': 'daily',
-            'reduce': true,
-            'group': true,
-            'descending': true,
-            'group_level': 3
-        }
-    }) }}
-    {{ sonata_block_render({
-        'type': 'bangpound_castle_search.block.date_view',
-        'settings': {
-            'title': 'Hourly',
-            'body': 'Count of items per hour for last 24 hours.',
-            'design_document': 'stats',
-            'view': 'daily',
-            'reduce': true,
-            'group': true,
-            'descending': true,
-            'group_level': 4,
-            'date_format': 'M-d-Y H:i:s'
-        }
-    }) }}
+    {{ render(controller('BangpoundCastleSearchBundle:Statistics:daily')) }}
+    {{ render(controller('BangpoundCastleSearchBundle:Statistics:hourly')) }}
 {% endblock %}
 
 {% block second_sidebar %}
-    {{ sonata_block_render({
-        'type': 'bangpound_castle_search.block.view',
-        'settings': {
-            'design_document': 'stats',
-            'view': 'collection',
-            'reduce': true,
-            'group': true,
-            'group_level': 1,
-        }
-    }) }}
-    <h2>Today</h2>
-    {% sonata_block_render({
-        'type': 'bangpound_castle_search.block.top_tag_view',
-        'settings': {
-            'design_document': 'stats',
-            'view': 'top_tag',
-            'list': 'top',
-            'reduce': true,
-            'group': true,
-            'group_level': 4,
-            'limit': 10,
-            'startkey': [ (date() | date('Y')) + 0, (date() | date('m')) + 0, (date() | date('d')) + 0 ],
-            'endkey': [ (date('+1 day') | date('Y')) + 0, (date('+1 day') | date('m')) + 0, (date('+1 day') | date('d')) + 0 ],
-            'template': 'BangpoundCastleSearchBundle:Block:block_view_top_tag.html.twig'
-        }
-    }) %}
-    <h2>Yesterday</h2>
-    {% sonata_block_render({
-        'type': 'bangpound_castle_search.block.top_tag_view',
-        'settings': {
-            'design_document': 'stats',
-            'view': 'top_tag',
-            'list': 'top',
-            'reduce': true,
-            'group': true,
-            'group_level': 4,
-            'limit': 10,
-            'startkey': [ (date('-1 day') | date('Y')) + 0, (date('-1 day') | date('m')) + 0, (date('-1 day') | date('d')) + 0 ],
-            'endkey': [ (date() | date('Y')) + 0, (date() | date('m')) + 0, (date() | date('d')) + 0 ],
-            'template': 'BangpoundCastleSearchBundle:Block:block_view_top_tag.html.twig'
-        }
-    }) %}
+    {{ render(controller('BangpoundCastleSearchBundle:Statistics:collection')) }}
+    {{ render(controller('BangpoundCastleSearchBundle:Statistics:topTag', {'title': 'Today', 'body': 'Top tags for today', 'start': date('now') | date('Y-m-d'), 'end': date('-1 day') | date('Y-m-d')})) }}
+    {{ render(controller('BangpoundCastleSearchBundle:Statistics:topTag', {'title': 'Yesterday', 'body': 'Top tags for yesterday', 'start': date('-1 day') | date('Y-m-d'), 'end': date('-2 day') | date('Y-m-d')})) }}
 {% endblock %}

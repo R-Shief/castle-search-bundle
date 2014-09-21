@@ -1,6 +1,3 @@
-{% extends sonata_block.templates.block_base %}
-
-{% block block %}
 <div class="panel panel-default">
     {% if settings.title %}
         <div class="panel-heading">{{ settings.title }}</div>
@@ -13,10 +10,9 @@
         {% for result in results %}
             <tr>
                 <th><a href="{{ url('bangpound_castle_search_result', { 'collection': result.key | lower }) }}">{{ result.label }}</a></th>
-                <td class="text-right">{{ result.value.count|number_format }}</td>
+                <td class="text-right">{{ result.value|number_format }}</td>
             </tr>
         {% endfor %}
         </table>
     {% endblock %}
 </div>
-{% endblock %}
