@@ -123,6 +123,7 @@ class StatisticsController extends Controller
         );
         $query = $conn->createViewQuery('stats', 'collection');
         $query->setGroup(true);
+        $query->setStale('ok');
 
         $results = array();
         foreach ($query->execute() as $result) {
