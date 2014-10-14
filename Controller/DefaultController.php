@@ -49,6 +49,7 @@ class DefaultController extends Controller
                 'label_attr' => array(
                     'class' => 'control-label sr-only',
                 ),
+                'required' => false,
             ))
             ->add('published_upper', 'date', array(
                 'months' => array($upperDate->format('n'), $upperDate->sub(new \DateInterval('P1M'))->format('n')),
@@ -58,6 +59,7 @@ class DefaultController extends Controller
                 'label_attr' => array(
                     'class' => 'control-label sr-only',
                 ),
+                'required' => false,
             ))
             ->add('search', 'submit', array(
                 'label' => '<i class="glyphicon glyphicon-search"></i>',
