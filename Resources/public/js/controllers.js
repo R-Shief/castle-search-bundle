@@ -64,6 +64,10 @@ castleSearch
             .field('type')
             .size(10));
 
+        $scope.query.facet(ejs.TermsFacet('Filter Level'))
+            .field('extra.filter_level')
+            .size(3);
+
         $scope.query.facet(ejs.DateHistogramFacet('Date posted')
             .field('published')
             .interval('day'));
