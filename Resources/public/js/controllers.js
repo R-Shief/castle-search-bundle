@@ -48,16 +48,16 @@ castleSearch
             .field('lang')
             .size(10));
 
+        $scope.query.facet(ejs.TermsFacet('Tags (# and meta)')
+            .field('categories.term')
+            .size(10));
+
         $scope.query.facet(ejs.TermsFacet('Source')
             .field('source.title.text')
             .size(10));
 
         $scope.query.facet(ejs.TermsFacet('Author')
             .field('authors.name')
-            .size(10));
-
-        $scope.query.facet(ejs.TermsFacet('Tags (# and meta)')
-            .field('categories.term')
             .size(10));
 
         $scope.query.facet(ejs.TermsFacet('Collection')
