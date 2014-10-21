@@ -315,7 +315,7 @@ castleSearch
         $scope.getTags = function (val) {
             var endkey = val.substr(0, val.length - 1) + String.fromCharCode(val.charCodeAt(val.length - 1) + 1);
             return $scope.db
-                .query('stats', 'tag', {
+                .query('tag', 'timeseries', {
                     stale: 'ok',
                     group: true,
                     group_level: 1,
@@ -332,7 +332,7 @@ castleSearch
         $scope.getData = function () {
             if ($scope.tag) {
                 $scope.db
-                    .query('stats', 'tag', {
+                    .query('tag', 'timeseries', {
                         stale: 'ok',
                         group: true,
                         group_level: 5,
