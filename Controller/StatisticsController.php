@@ -22,7 +22,7 @@ class StatisticsController extends Controller
             'title' => 'Daily',
             'body' => 'Count of items per day for last week.',
         );
-        $query = $conn->createViewQuery('stats', 'published');
+        $query = $conn->createViewQuery('published', 'timeseries');
 
         $query->setStale('ok');
         $query->setLimit(7);
@@ -72,7 +72,7 @@ class StatisticsController extends Controller
             'title'=> 'Hourly',
             'body'=> 'Count of items per hour for last 24 hours.',
         );
-        $query = $conn->createViewQuery('stats', 'published');
+        $query = $conn->createViewQuery('published', 'timeseries');
 
         if ($query) {
             $query->setStale('ok');
@@ -121,7 +121,7 @@ class StatisticsController extends Controller
             'title' => 'Collections',
             'body' => 'Count of items in each collection.',
         );
-        $query = $conn->createViewQuery('stats', 'collection');
+        $query = $conn->createViewQuery('collection', 'timeseries');
         $query->setGroup(true);
         $query->setStale('ok');
 
