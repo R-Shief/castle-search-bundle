@@ -69,8 +69,8 @@ class StatisticsController extends Controller
         /** @var \Doctrine\CouchDB\CouchDBClient $dm */
         $conn = $this->get('doctrine_couchdb.client.default_connection');
         $settings = array(
-            'title'=> 'Hourly',
-            'body'=> 'Count of items per hour for last 24 hours.',
+            'title' => 'Hourly',
+            'body' => 'Count of items per hour for last 24 hours.',
         );
         $query = $conn->createViewQuery('published', 'timeseries');
 
@@ -133,7 +133,6 @@ class StatisticsController extends Controller
                 'value' => $result['value'],
             ];
         }
-
 
         return array(
             'query'     => $query,

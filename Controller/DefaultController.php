@@ -28,7 +28,7 @@ class DefaultController extends Controller
             'attr' => array(
                 'class' => 'form-inline facetview_search_options_container',
                 'role' => 'search',
-        )))
+        ), ))
             ->add('queryTerm', 'search', array(
                 'constraints' => array(
                     new NotBlank(),
