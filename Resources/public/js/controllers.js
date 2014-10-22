@@ -4,7 +4,7 @@ castleSearch
         'use strict';
         var oQuery = ejs.QueryStringQuery();
 
-        angular.forEach(['sort', 'queryTerm', 'tag', 'collection', 'published_upper', 'published_lower'], function (key) {
+        angular.forEach(['sort', 'queryTerm', 'tag', 'collection', 'published_upper', 'published_lower', 'language'], function (key) {
             $scope[key] = $location.search()[key];
             $scope.$watch(key, function (value) {
                 $location.search(key, value);
@@ -37,6 +37,10 @@ castleSearch
 
         if ($scope.collection) {
             $scope.activeFilters['Collection:' + $scope.collection] = ejs.TermFilter('type', $scope.collection);
+        }
+
+        if ($scope.language) {
+            $scope.activeFilters['Language:' + $scope.language] = ejs.TermFilter('lang', $scope.language);
         }
 
         $scope.pager = {

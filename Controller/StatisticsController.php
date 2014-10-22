@@ -143,6 +143,41 @@ class StatisticsController extends Controller
 
     /**
      * @Template
+     * @return array
+     */
+    public function languageAction()
+    {
+        /** @var \Doctrine\CouchDB\CouchDBClient $dm */
+        $conn = $this->get('doctrine_couchdb.client.default_connection');
+        $start = new \DateTime('-1 month');
+        $end = new \DateTime();
+        $settings = array(
+          'title' => 'Languages',
+          'body' => 'Collected from '.$start->format('n M').' to '.$end->format('n M'),
+        );
+        $query = $conn->createViewQuery('lang', 'timeseries');
+        $query->setGroup(true);
+        $query->setStale('ok');
+        $query->setGroupLevel(1);
+
+        $results = array();
+        foreach ($query->execute() as $result) {
+            $results[] = [
+              'key' => $result['key'][0],
+              'label' => isset($map[$result['key'][0]]) ? $map[$result['key'][0]] : $result['key'][0],
+              'value' => $result['value'],
+            ];
+        }
+
+        return array(
+          'query'     => $query,
+          'results'   => $results,
+          'settings'  => $settings,
+        );
+    }
+
+    /**
+     * @Template
      * @ParamConverter("start", options={"format": "Y-m-d"})
      * @ParamConverter("end", options={"format": "Y-m-d"})
      * @return array
