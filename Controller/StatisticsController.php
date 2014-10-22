@@ -165,7 +165,7 @@ class StatisticsController extends Controller
         $results = array();
         foreach ($query->execute() as $result) {
             $results[] = [
-              'key' => $lang_key[$result['key'][0]],
+              'key' => $result['key'][0],
               'label' => isset($map[$result['key'][0]]) ? $map[$result['key'][0]] : $result['key'][0],
               'value' => $result['value'],
             ];
@@ -175,7 +175,6 @@ class StatisticsController extends Controller
           'query'     => $query,
           'results'   => $results,
           'settings'  => $settings,
-          'lang_key'  => $this->languagesArrayAction(),
         );
     }
 
