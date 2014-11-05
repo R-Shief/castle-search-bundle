@@ -35,10 +35,6 @@ castleSearch
                 .to(parseInt($scope.published_upper, 10));
         }
 
-        if ($scope.collection) {
-            $scope.activeFilters['Collection:' + $scope.collection] = ejs.TermFilter('type', $scope.collection);
-        }
-
         if ($scope.language) {
             $scope.activeFilters['Language:' + $scope.language] = ejs.TermFilter('lang', $scope.language);
         }
