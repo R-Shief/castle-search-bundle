@@ -306,6 +306,7 @@ castleSearch
         $scope.$watch('tag', function (value) {
             $location.hash(value);
         });
+
         $scope.$watch(function () {
             return $location.hash();
         }, function (value) {
@@ -313,7 +314,12 @@ castleSearch
         });
 
         $scope.getTags = function (val) {
-            var endkey = val.substr(0, val.length - 1) + String.fromCharCode(val.charCodeAt(val.length - 1) + 1);
+
+            var endPosition      = val.length - 1,
+                endCharacterCode = val.charCodeAt(endPosition),
+                nextCharacter    = String.fromCharCode(endCharacterCode + 1),
+                endkey           = val.substr(0, endPosition) + nextCharacter;
+
             return $scope.db
                 .query('tag', 'timeseries', {
                     stale: 'ok',
@@ -345,7 +351,7 @@ castleSearch
                             utc[1] = utc[1] - 1;
                             return {
                                 x: new Date(Date.UTC.apply(null, utc)),
-                                value: parseInt(row.value.sum, 10)
+                                value: parseInt(row.value, 10)
                             };
                         });
                     }
