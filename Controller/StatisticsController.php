@@ -155,7 +155,7 @@ class StatisticsController extends Controller
           'title' => 'Languages',
           'body' => 'Collected from '.$start->format('n M').' to '.$end->format('n M'),
         );
-        $query = $conn->createViewQuery('lang', 'timeseries');
+        $query = $conn->createViewQuery('lang', 'basic');
         $query->setGroup(true);
         $query->setStale('ok');
         $query->setGroupLevel(1);
@@ -165,8 +165,8 @@ class StatisticsController extends Controller
         $results = array();
         foreach ($query->execute() as $result) {
             $results[] = [
-              'key' => $result['key'][0],
-              'label' => isset($map[$result['key'][0]]) ? $map[$result['key'][0]] : $result['key'][0],
+              'key' => $result['key'],
+              'label' => isset($map[$result['key']]) ? $map[$result['key']] : $result['key'],
               'value' => $result['value'],
             ];
         }
