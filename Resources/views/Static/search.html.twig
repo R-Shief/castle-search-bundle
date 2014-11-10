@@ -42,4 +42,19 @@
     <div class="clearfix">
         <linechart data="data" options="options" mode=""></linechart>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <carousel interval="5000">
+                <slide ng-repeat="slide in slides">
+                    <img ng-src="{% verbatim %}{{ slide }}{% endverbatim %}">
+                </slide>
+            </carousel>
+        </div>
+        <div class="col-md-6">
+            <ul>
+                <li ng-repeat="link in links"><a ng-href="{% verbatim %}{{ link }}{% endverbatim %}">{% verbatim %}{{ link }}{% endverbatim %}</a></li>
+            </ul>
+        </div>
+
+    </div>
 {% endblock %}

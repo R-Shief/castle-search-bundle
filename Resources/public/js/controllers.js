@@ -356,6 +356,52 @@ castleSearch
                         });
                     }
                 );
+
+                $scope.db
+                    .query('enclosure', 'tags', {
+                        stale: 'ok',
+                        group: true,
+                        group_level: 2,
+                        startkey: [$scope.tag],
+                        endkey: [$scope.tag, {}]
+                    })
+                    .then(function (res) {
+                        var reverseSort = function (row) {
+                                return -row.value;
+                            },
+                            slideFactory = function (row) {
+                                return row.key[1];
+                            },
+                            filterLongTail = function (row) {
+                                return (row.value > 5);
+                            };
+
+                        $scope.slides = _.map(_.sortBy(_.filter(res.data.rows, filterLongTail), reverseSort), slideFactory);
+                    }
+                );
+
+                $scope.db
+                    .query('nofollow', 'tags', {
+                        stale: 'ok',
+                        group: true,
+                        group_level: 2,
+                        startkey: [$scope.tag],
+                        endkey: [$scope.tag, {}]
+                    })
+                    .then(function (res) {
+                        var reverseSort = function (row) {
+                                return -row.value;
+                            },
+                            listFactory = function (row) {
+                                return row.key[1];
+                            },
+                            filterLongTail = function (row) {
+                                return (row.value > 5);
+                            };
+
+                        $scope.links = _.map(_.sortBy(_.filter(res.data.rows, filterLongTail), reverseSort), listFactory);
+                    }
+                );
             }
         };
 
