@@ -7,6 +7,8 @@
     {% endstylesheets %}
 {% endblock %}
 
+{% block body_controller %} ng-controller="TagsTypeahead" ng-cloak{% endblock %}
+
 {% block javascripts %}
     {{ parent() }}
     {% javascripts
@@ -75,11 +77,13 @@
                 <li><a title="Community" href="http://r-shief.org/community">Community</a></li>
             </ul>
         </div>
-
     </div>
 {% endblock %}
 
 {% block content %}
+    <h1 class="page-header">Enter a hashtag</h1>
+    <input type="text" ng-model="tag" typeahead-on-select="getData()" typeahead-min-length="3" typeahead-wait-ms="100" typeahead-editable="false" placeholder="Start typing and our list of keywords will drop down" typeahead="address for address in getTags($viewValue) | filter:$viewValue" class="form-control input-lg">
+    <i ng-show="loadingLocations" class="glyphicon glyphicon-refresh"></i>
     <div class="clearfix">
         <linechart data="data" options="options" mode=""></linechart>
     </div>
