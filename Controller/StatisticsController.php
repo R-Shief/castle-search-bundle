@@ -31,6 +31,8 @@ class StatisticsController extends Controller
         $query->setGroup(true);
         $query->setGroupLevel(3);
 
+        $results = array();
+
         if ($query) {
             $date_key = 0;
             $format = 'M-d-Y';
@@ -73,6 +75,7 @@ class StatisticsController extends Controller
             'body' => 'Count of items per hour for last 24 hours.',
         );
         $query = $conn->createViewQuery('published', 'timeseries');
+        $results = array();
 
         if ($query) {
             $query->setStale('ok');
