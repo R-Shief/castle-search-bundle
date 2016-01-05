@@ -1,17 +1,5 @@
 {% extends "@BangpoundCastleSearch/layout.html.twig" %}
 
-{% block stylesheets %}
-    {{ parent() }}
-    {% stylesheets filter='cssrewrite'
-    %}<link href="{{ asset_url }}" type="text/css" rel="stylesheet" />{% endstylesheets %}
-{% endblock %}
-
-{% block javascripts %}
-    {{ parent() }}
-    {% javascripts
-    %}<script type="text/javascript" src="{{ asset_url }}"></script>{% endjavascripts %}
-{% endblock %}
-
 {% block navbar %}
     <nav class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -65,6 +53,6 @@
 
 {% block second_sidebar %}
     {{ render(controller('BangpoundCastleSearchBundle:Statistics:language')) }}
-    {{ render(controller('BangpoundCastleSearchBundle:Statistics:topTag', {'title': 'Today', 'body': 'Top tags for today', 'start': date('now') | date('Y-m-d'), 'end': date('-1 day') | date('Y-m-d')})) }}
-    {{ render(controller('BangpoundCastleSearchBundle:Statistics:topTag', {'title': 'Yesterday', 'body': 'Top tags for yesterday', 'start': date('-1 day') | date('Y-m-d'), 'end': date('-2 day') | date('Y-m-d')})) }}
+    {#{{ render(controller('BangpoundCastleSearchBundle:Statistics:topTag', {'title': 'Today', 'body': 'Top tags for today', 'start': date('now') | date('Y-m-d'), 'end': date('-1 day') | date('Y-m-d')})) }}#}
+    {#{{ render(controller('BangpoundCastleSearchBundle:Statistics:topTag', {'title': 'Yesterday', 'body': 'Top tags for yesterday', 'start': date('-1 day') | date('Y-m-d'), 'end': date('-2 day') | date('Y-m-d')})) }}#}
 {% endblock %}
